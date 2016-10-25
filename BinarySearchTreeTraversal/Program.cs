@@ -10,19 +10,23 @@ namespace BinarySearchTreeTraversal
     {
         static void Main(string[] args)
         {
-            var array = new List<int> {2, 5, 50, 1 , 0, 240, 33, 0 };
+            var array = new List<int> {2, 5, 50, 1 , 0, 240, 33, 0, -100, -1000, 4, 35 };
 
             BinarySearchTree bst = new BinarySearchTree();
             foreach(var a in array)
             {
                 bst.BuildTree(null, a);
             }
+
+            bst.InOrderTraversal(bst.RootNode);
+
+            Console.Read();
         }
     }
 
     public class BinarySearchTree
     {
-        private Node<int> RootNode { get; set; }
+        public Node<int> RootNode { get; set; }
 
         public void BuildTree(Node<int> node, int value)
         {
@@ -63,9 +67,16 @@ namespace BinarySearchTreeTraversal
             }
         }
 
-        public void InOrderTraversal()
+        public void InOrderTraversal(Node<int> node)
         {
+            if (node == null)
+                return;
 
+            InOrderTraversal(node.LeftChild);
+
+            Console.Write(node.Value + " ");
+
+            InOrderTraversal(node.RightChild);
         }
     }    
 
